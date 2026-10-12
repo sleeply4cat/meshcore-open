@@ -5615,6 +5615,9 @@ class MeshCoreConnector extends ChangeNotifier {
         _handlePathUpdated(frame);
         break;
       case pushCodeControlData:
+      case respCodeSpectrumInfo:
+      case pushCodeSpectrumFrame:
+      case pushCodeSpectrumStopped:
         // Optional feature-specific services listen to receivedFrames directly.
         break;
       case pushCodeLoginSuccess:

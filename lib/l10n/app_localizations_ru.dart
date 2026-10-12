@@ -6200,4 +6200,126 @@ class AppLocalizationsRu extends AppLocalizations {
   String neighbors_durationHours(int hours, int minutes) {
     return '$hoursч $minutesм';
   }
+
+  @override
+  String get spectrum_title => 'Спектр';
+
+  @override
+  String get spectrum_settingsTile => 'Спектр';
+
+  @override
+  String get spectrum_settingsSubtitle =>
+      'Спектр и водопад вокруг частоты ноды; mesh на паузе';
+
+  @override
+  String get spectrum_settings => 'Настройки спектра';
+
+  @override
+  String get spectrum_start => 'Запустить';
+
+  @override
+  String get spectrum_stop => 'Остановить';
+
+  @override
+  String get spectrum_stopped => 'Остановлено';
+
+  @override
+  String get spectrum_starting => 'Ждём радио…';
+
+  @override
+  String get spectrum_meshPaused => 'Пока идёт спектр, mesh на паузе';
+
+  @override
+  String get spectrum_unsupported =>
+      'В этой прошивке нет потока спектра. Нужен компаньон на nRF52 + SX1262, собранный с SPECTRUM_STREAM.';
+
+  @override
+  String spectrum_refused(int code) {
+    return 'Нода не приняла настройки (ошибка $code)';
+  }
+
+  @override
+  String get spectrum_stopTimeout => 'Нода остановила спектр: нет продления';
+
+  @override
+  String get spectrum_stopDisconnected =>
+      'Нода остановила спектр: связь потеряна';
+
+  @override
+  String spectrum_stopRadio(int code) {
+    return 'Нода остановила спектр: ошибка радио $code';
+  }
+
+  @override
+  String get spectrum_centre => 'Центральная частота';
+
+  @override
+  String get spectrum_left => 'Сдвинуть влево';
+
+  @override
+  String get spectrum_right => 'Сдвинуть вправо';
+
+  @override
+  String get spectrum_nodeChannel => 'По центру канала ноды';
+
+  @override
+  String get spectrum_noise => 'Шум';
+
+  @override
+  String get spectrum_frames => 'Кадры';
+
+  @override
+  String get spectrum_sweeps => 'Свипы';
+
+  @override
+  String get spectrum_step => 'Шаг';
+
+  @override
+  String spectrum_lost(int percent) {
+    return '$percent% потеряно';
+  }
+
+  @override
+  String get spectrum_rate => 'Кадры от ноды';
+
+  @override
+  String get spectrum_everySweep => 'Каждый свип';
+
+  @override
+  String spectrum_perSecond(int count) {
+    return '$count/с';
+  }
+
+  @override
+  String get spectrum_aggregation => 'Что в кадре';
+
+  @override
+  String get spectrum_aggMax => 'Максимум (ловит всплески)';
+
+  @override
+  String get spectrum_aggMean => 'Средняя мощность';
+
+  @override
+  String get spectrum_aggLast => 'Последний свип';
+
+  @override
+  String get spectrum_averaging => 'Усреднение';
+
+  @override
+  String get spectrum_off => 'Выкл';
+
+  @override
+  String get spectrum_hold => 'Удержание пиков';
+
+  @override
+  String get spectrum_holdDecay => 'Затухающее';
+
+  @override
+  String get spectrum_holdMax => 'Максимум';
+
+  @override
+  String get spectrum_range => 'Диапазон по вертикали';
+
+  @override
+  String get spectrum_clear => 'Сбросить пики и водопад';
 }

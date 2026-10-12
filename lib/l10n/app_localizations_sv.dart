@@ -6130,4 +6130,128 @@ class AppLocalizationsSv extends AppLocalizations {
   String neighbors_durationHours(int hours, int minutes) {
     return '$hours h $minutes min';
   }
+
+  @override
+  String get spectrum_title => 'Spectrum';
+
+  @override
+  String get spectrum_settingsTile => 'Spectrum';
+
+  @override
+  String get spectrum_settingsSubtitle =>
+      'Live spectrum and waterfall around the node; pauses the mesh';
+
+  @override
+  String get spectrum_settings => 'Spectrum settings';
+
+  @override
+  String get spectrum_start => 'Start';
+
+  @override
+  String get spectrum_stop => 'Stop';
+
+  @override
+  String get spectrum_stopped => 'Stopped';
+
+  @override
+  String get spectrum_starting => 'Waiting for the radio…';
+
+  @override
+  String get spectrum_meshPaused =>
+      'The mesh is paused while the spectrum runs';
+
+  @override
+  String get spectrum_unsupported =>
+      'This firmware has no spectrum stream. It needs an nRF52 + SX1262 companion built with SPECTRUM_STREAM.';
+
+  @override
+  String spectrum_refused(int code) {
+    return 'The node refused the settings (error $code)';
+  }
+
+  @override
+  String get spectrum_stopTimeout =>
+      'The node stopped the spectrum: no keepalive';
+
+  @override
+  String get spectrum_stopDisconnected =>
+      'The node stopped the spectrum: connection lost';
+
+  @override
+  String spectrum_stopRadio(int code) {
+    return 'The node stopped the spectrum: radio error $code';
+  }
+
+  @override
+  String get spectrum_centre => 'Centre frequency';
+
+  @override
+  String get spectrum_left => 'Move left';
+
+  @override
+  String get spectrum_right => 'Move right';
+
+  @override
+  String get spectrum_nodeChannel => 'Centre on the node\'s channel';
+
+  @override
+  String get spectrum_noise => 'Noise';
+
+  @override
+  String get spectrum_frames => 'Frames';
+
+  @override
+  String get spectrum_sweeps => 'Sweeps';
+
+  @override
+  String get spectrum_step => 'Step';
+
+  @override
+  String spectrum_lost(int percent) {
+    return '$percent% lost';
+  }
+
+  @override
+  String get spectrum_rate => 'Frames from the node';
+
+  @override
+  String get spectrum_everySweep => 'Every sweep';
+
+  @override
+  String spectrum_perSecond(int count) {
+    return '$count/s';
+  }
+
+  @override
+  String get spectrum_aggregation => 'A frame holds';
+
+  @override
+  String get spectrum_aggMax => 'Max (catches bursts)';
+
+  @override
+  String get spectrum_aggMean => 'Mean power';
+
+  @override
+  String get spectrum_aggLast => 'Latest sweep';
+
+  @override
+  String get spectrum_averaging => 'Averaging';
+
+  @override
+  String get spectrum_off => 'Off';
+
+  @override
+  String get spectrum_hold => 'Peak hold';
+
+  @override
+  String get spectrum_holdDecay => 'Decaying';
+
+  @override
+  String get spectrum_holdMax => 'Max';
+
+  @override
+  String get spectrum_range => 'Vertical range';
+
+  @override
+  String get spectrum_clear => 'Clear hold and waterfall';
 }

@@ -10350,6 +10350,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{hours}h {minutes}m'**
   String neighbors_durationHours(int hours, int minutes);
+
+  /// No description provided for @spectrum_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Spectrum'**
+  String get spectrum_title;
+
+  /// No description provided for @spectrum_settingsTile.
+  ///
+  /// In en, this message translates to:
+  /// **'Spectrum'**
+  String get spectrum_settingsTile;
+
+  /// No description provided for @spectrum_settingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Live spectrum and waterfall around the node; pauses the mesh'**
+  String get spectrum_settingsSubtitle;
+
+  /// No description provided for @spectrum_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Spectrum settings'**
+  String get spectrum_settings;
+
+  /// No description provided for @spectrum_start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get spectrum_start;
+
+  /// No description provided for @spectrum_stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get spectrum_stop;
+
+  /// No description provided for @spectrum_stopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopped'**
+  String get spectrum_stopped;
+
+  /// No description provided for @spectrum_starting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the radio…'**
+  String get spectrum_starting;
+
+  /// No description provided for @spectrum_meshPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'The mesh is paused while the spectrum runs'**
+  String get spectrum_meshPaused;
+
+  /// No description provided for @spectrum_unsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This firmware has no spectrum stream. It needs an nRF52 + SX1262 companion built with SPECTRUM_STREAM.'**
+  String get spectrum_unsupported;
+
+  /// No description provided for @spectrum_refused.
+  ///
+  /// In en, this message translates to:
+  /// **'The node refused the settings (error {code})'**
+  String spectrum_refused(int code);
+
+  /// No description provided for @spectrum_stopTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'The node stopped the spectrum: no keepalive'**
+  String get spectrum_stopTimeout;
+
+  /// No description provided for @spectrum_stopDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'The node stopped the spectrum: connection lost'**
+  String get spectrum_stopDisconnected;
+
+  /// No description provided for @spectrum_stopRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'The node stopped the spectrum: radio error {code}'**
+  String spectrum_stopRadio(int code);
+
+  /// No description provided for @spectrum_centre.
+  ///
+  /// In en, this message translates to:
+  /// **'Centre frequency'**
+  String get spectrum_centre;
+
+  /// No description provided for @spectrum_left.
+  ///
+  /// In en, this message translates to:
+  /// **'Move left'**
+  String get spectrum_left;
+
+  /// No description provided for @spectrum_right.
+  ///
+  /// In en, this message translates to:
+  /// **'Move right'**
+  String get spectrum_right;
+
+  /// No description provided for @spectrum_nodeChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Centre on the node\'s channel'**
+  String get spectrum_nodeChannel;
+
+  /// No description provided for @spectrum_noise.
+  ///
+  /// In en, this message translates to:
+  /// **'Noise'**
+  String get spectrum_noise;
+
+  /// No description provided for @spectrum_frames.
+  ///
+  /// In en, this message translates to:
+  /// **'Frames'**
+  String get spectrum_frames;
+
+  /// No description provided for @spectrum_sweeps.
+  ///
+  /// In en, this message translates to:
+  /// **'Sweeps'**
+  String get spectrum_sweeps;
+
+  /// No description provided for @spectrum_step.
+  ///
+  /// In en, this message translates to:
+  /// **'Step'**
+  String get spectrum_step;
+
+  /// No description provided for @spectrum_lost.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% lost'**
+  String spectrum_lost(int percent);
+
+  /// No description provided for @spectrum_rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Frames from the node'**
+  String get spectrum_rate;
+
+  /// No description provided for @spectrum_everySweep.
+  ///
+  /// In en, this message translates to:
+  /// **'Every sweep'**
+  String get spectrum_everySweep;
+
+  /// No description provided for @spectrum_perSecond.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/s'**
+  String spectrum_perSecond(int count);
+
+  /// No description provided for @spectrum_aggregation.
+  ///
+  /// In en, this message translates to:
+  /// **'A frame holds'**
+  String get spectrum_aggregation;
+
+  /// No description provided for @spectrum_aggMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Max (catches bursts)'**
+  String get spectrum_aggMax;
+
+  /// No description provided for @spectrum_aggMean.
+  ///
+  /// In en, this message translates to:
+  /// **'Mean power'**
+  String get spectrum_aggMean;
+
+  /// No description provided for @spectrum_aggLast.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest sweep'**
+  String get spectrum_aggLast;
+
+  /// No description provided for @spectrum_averaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Averaging'**
+  String get spectrum_averaging;
+
+  /// No description provided for @spectrum_off.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get spectrum_off;
+
+  /// No description provided for @spectrum_hold.
+  ///
+  /// In en, this message translates to:
+  /// **'Peak hold'**
+  String get spectrum_hold;
+
+  /// No description provided for @spectrum_holdDecay.
+  ///
+  /// In en, this message translates to:
+  /// **'Decaying'**
+  String get spectrum_holdDecay;
+
+  /// No description provided for @spectrum_holdMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Max'**
+  String get spectrum_holdMax;
+
+  /// No description provided for @spectrum_range.
+  ///
+  /// In en, this message translates to:
+  /// **'Vertical range'**
+  String get spectrum_range;
+
+  /// No description provided for @spectrum_clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear hold and waterfall'**
+  String get spectrum_clear;
 }
 
 class _AppLocalizationsDelegate

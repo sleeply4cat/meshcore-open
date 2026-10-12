@@ -216,6 +216,8 @@ const int cmdGetAllowedRepeatFreq = 60;
 const int cmdSetPathHashMode = 61;
 const int cmdSetDefaultFloodScope = 63; // FIRMWARE_VER_CODE 11+
 const int cmdGetDefaultFloodScope = 64; // FIRMWARE_VER_CODE 11+
+const int cmdSpectrum =
+    0xE0; // nRF52 + SX1262 firmware built with SPECTRUM_STREAM
 
 // Text message types
 const int txtTypePlain = 0;
@@ -267,6 +269,7 @@ const int respCodeAutoAddConfig = 25;
 const int respCodeAllowedRepeatFreq = 26;
 const int respCodeStats = 24;
 const int respCodeDefaultFloodScope = 28;
+const int respCodeSpectrumInfo = 0xE0;
 
 /// Region name field width in SET/GET_DEFAULT_FLOOD_SCOPE frames (NUL padded,
 /// so at most 30 name bytes).
@@ -293,6 +296,8 @@ const int pushCodeBinaryResponse = 0x8C;
 const int pushCodeControlData = 0x8E;
 const int pushCodeContactDeleted = 0x8F;
 const int pushCodeContactsFull = 0x90;
+const int pushCodeSpectrumFrame = 0xE1;
+const int pushCodeSpectrumStopped = 0xE2;
 
 // Contact/advertisement types
 const int advTypeChat = 1;

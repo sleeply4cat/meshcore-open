@@ -122,6 +122,7 @@ On unexpected disconnection, auto-reconnect with exponential backoff:
 | 62 | CMD_SEND_CHANNEL_DATA | Send GRP_DATA image chunks (firmware code 11+) |
 | 63 | CMD_SET_DEFAULT_FLOOD_SCOPE | Store the radio's default flood scope: `[63][name 31, NUL padded][key 16]`, or `[63]` to clear (firmware code 11+) |
 | 64 | CMD_GET_DEFAULT_FLOOD_SCOPE | Read the radio's default flood scope (firmware code 11+) |
+| 0xE0 | CMD_SPECTRUM | Start, renew or stop a spectrum stream (nRF52 + SX1262 firmware built with `SPECTRUM_STREAM`); see [Spectrum stream](#spectrum-stream) |
 
 ## Response / Push Codes (Device → App)
 
@@ -149,6 +150,7 @@ On unexpected disconnection, auto-reconnect with exponential backoff:
 | 25 | RESP_CODE_AUTO_ADD_CONFIG | Auto-add flags |
 | 27 | RESP_CODE_CHANNEL_DATA_RECV | Received GRP_DATA image chunk |
 | 28 | RESP_CODE_DEFAULT_FLOOD_SCOPE | `[28][name 31][key 16]`, or `[28]` alone when no default is set |
+| 0xE0 | RESP_SPECTRUM_INFO | Spectrum session state, the reply to CMD_SPECTRUM |
 | 0x80 | PUSH_CODE_ADVERT | Known contact re-seen |
 | 0x81 | PUSH_CODE_PATH_UPDATED | Better path found; carries the 32-byte public key of the updated contact |
 | 0x82 | PUSH_CODE_SEND_CONFIRMED | Delivery ACK from remote; carries ACK hash (4 bytes) + trip time (4 bytes) |
@@ -162,6 +164,8 @@ On unexpected disconnection, auto-reconnect with exponential backoff:
 | 0x8B | PUSH_CODE_TELEMETRY_RESPONSE | Sensor telemetry data |
 | 0x8C | PUSH_CODE_BINARY_RESPONSE | Binary data response |
 | 0x8E | PUSH_CODE_CONTROL_DATA | Control data push (e.g. zero-hop discovery response) |
+| 0xE1 | PUSH_SPECTRUM_FRAME | Spectrum levels |
+| 0xE2 | PUSH_SPECTRUM_STOPPED | The node ended a spectrum session by itself |
 
 ## Data Models
 
@@ -278,3 +282,20 @@ Reactions use `r:<four-hex message hash>:<two-hex emoji index>`. Channel replies
 Transport-routed raw packets include four transport-code bytes before packed path metadata. For transport floods, the app matches the first two code bytes against locally known region candidates using HMAC-SHA256 over `[payloadType][payload]`. Region scope keys are the first 16 bytes of SHA256 of `#<region>`. The radio's default flood scope is also a candidate, matched on the key the radio reports (it may have been set by another client). The name itself is not carried as plain text. Unknown or ambiguous matches remain null; see [regions](regions.md).
 
 Image chunks use `CMD_SEND_CHANNEL_DATA` (62), `RESP_CODE_CHANNEL_DATA_RECV` (27), and application data type `0xAE1C`. The framing, capacities, metadata byte, and XOR recovery algorithm are defined in [image_chunk_transport.dart](../lib/services/image_chunk_transport.dart), which is the source of truth. See [image messages](image-messages.md) for user requirements and limitations.
+
+## Spectrum stream
+
+Companion firmware built with `SPECTRUM_STREAM` on an nRF52 with an SX1262 sweeps a band on request and streams the levels; the mesh is paused while it runs. Other firmware answers `CMD_SPECTRUM` with `RESP_CODE_ERR` 1 (unsupported). Values are little-endian.
+
+The app starts a session with `OP_START` and repeats it every 5 s while it watches; the node ends it after 15 s without one, on `OP_STOP`, when the link drops, or on a radio error, and then restores its radio settings. An `OP_START` with other settings changes them.
+
+| Frame | Layout |
+|---|---|
+| OP_START | `[0xE0][1][centre Hz u32, 0 = node frequency][span Hz u32, ≤ 32 MHz, ≥ 100 Hz per point, within 150–960 MHz][points u8, 16–250][RBW Hz u32, 0 = 2.5 steps][interval ms u16, 10–5000, 0 = every sweep][agg u8: 0 max, 1 mean power, 2 latest sweep]` |
+| OP_STOP | `[0xE0][2]`, optionally `[flags u8]` (1: drop the BLE link afterwards, for web clients) |
+| RESP_SPECTRUM_INFO | `[0xE0][state u8: 0 off, 1 starting, 2 running][config u8][points u8][first point Hz u32][step Hz u32][RBW Hz u32][interval ms u16][agg u8][sweeps/s × 10 u16]` |
+| PUSH_SPECTRUM_FRAME | `[0xE1][config u8][frame no u8][first point u8][level per point: −2 × dBm, 255 = no reading]`; a frame of more than 168 points comes in several pushes with the same frame number |
+| PUSH_SPECTRUM_STOPPED | `[0xE2][reason u8: 1 no renewal, 2 link lost, 3 radio error][RadioLib error i16]` |
+
+`config` changes with the sweep settings so that frames of earlier settings can be dropped; gaps in the frame number are frames the node skipped because the link was busy. Settings out of range get `RESP_CODE_ERR` 6. The app's client is [spectrum_stream.dart](../lib/services/spectrum_stream.dart); review mode simulates it.
+

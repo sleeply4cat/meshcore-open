@@ -26,8 +26,9 @@ MeshCore Open is an open-source Flutter client for MeshCore LoRa mesh networking
 13. [Regions](regions.md) - App and radio default regions, unscoped sends, message labels, and reply regions
 14. [Image Messages](image-messages.md) - Model setup, mesh image sending, recovery, and reconstruction
 15. [Companion Radio Statistics](radio-statistics.md) - Noise, signal metrics, and airtime
-16. [Troubleshooting](troubleshooting.md) - BLE, USB, browser, and firmware issues
-17. [Review Mode](review-mode.md) - Simulated radio and reviewer instructions for Google Play and App Store review
+16. [Spectrum](spectrum.md) - Live spectrum and waterfall from the companion's radio
+17. [Troubleshooting](troubleshooting.md) - BLE, USB, browser, and firmware issues
+18. [Review Mode](review-mode.md) - Simulated radio and reviewer instructions for Google Play and App Store review
 
 ## App Overview
 

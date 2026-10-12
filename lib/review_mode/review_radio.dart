@@ -8,6 +8,7 @@ import '../connector/pending_command_replies.dart';
 import '../services/message_retry_service.dart';
 import 'review_frames.dart';
 import 'review_script.dart';
+import 'review_spectrum.dart';
 
 /// A simulated MeshCore radio that speaks the companion binary protocol.
 class ReviewRadio {
@@ -49,6 +50,9 @@ class ReviewRadio {
 
   Timer? _flushTimer;
   Timer? _scheduledTimer;
+  late final ReviewSpectrum _spectrum = ReviewSpectrum(
+    emit: (frame) => _emit([frame]),
+  );
   bool _disposed = false;
   bool _nextScheduledIsDirect = true;
   int _directPoolIndex = 0;
@@ -285,6 +289,11 @@ class ReviewRadio {
                   rxAirSecs: 48,
                 )
               : ReviewFrames.err(),
+        ]);
+        break;
+      case cmdSpectrum:
+        _emit([
+          _spectrum.handle(frame, nodeHz: _frequencyHz, nodeBwHz: _bandwidthHz),
         ]);
         break;
       case cmdSetAdvertName:
@@ -643,6 +652,7 @@ class ReviewRadio {
   void dispose() {
     if (_disposed) return;
     _disposed = true;
+    _spectrum.dispose();
     _scheduledTimer?.cancel();
     _scheduledTimer = null;
     _flushTimer?.cancel();
