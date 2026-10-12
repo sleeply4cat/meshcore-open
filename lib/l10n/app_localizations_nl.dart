@@ -6280,4 +6280,230 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get networkMap_unnamed => 'Naamloze repeater';
+
+  @override
+  String get loraScan_settingsTile => 'LoRa scan';
+
+  @override
+  String get loraScan_settingsSubtitle =>
+      'Find LoRa networks around the node; pauses the mesh';
+
+  @override
+  String get loraScan_title => 'LoRa scan';
+
+  @override
+  String get loraScan_start => 'Start scan';
+
+  @override
+  String get loraScan_stop => 'Stop';
+
+  @override
+  String get loraScan_settings => 'Scan settings';
+
+  @override
+  String loraScan_passEstimate(String seconds) {
+    return 'pass ≈ $seconds s';
+  }
+
+  @override
+  String get loraScan_band => 'Band';
+
+  @override
+  String get loraScan_from => 'From';
+
+  @override
+  String get loraScan_to => 'To';
+
+  @override
+  String get loraScan_aroundNode => 'Node ± 0.5 MHz';
+
+  @override
+  String get loraScan_bandwidths => 'Bandwidths, kHz';
+
+  @override
+  String get loraScan_spreadingFactors => 'Spreading factors';
+
+  @override
+  String get loraScan_step => 'Step between points';
+
+  @override
+  String get loraScan_stepAuto => 'Auto (BW/2)';
+
+  @override
+  String get loraScan_cad => 'Channel activity detection';
+
+  @override
+  String loraScan_symbols(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count symbols',
+      one: '1 symbol',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_threshold => 'Threshold';
+
+  @override
+  String get loraScan_thresholdHint =>
+      'Higher: fewer false alarms, weaker signals missed. Longer CAD: surer, slower.';
+
+  @override
+  String get loraScan_duration => 'Scan time';
+
+  @override
+  String get loraScan_listen => 'Listen on each candidate';
+
+  @override
+  String get loraScan_unsupported =>
+      'This firmware has no LoRa scan. It needs an nRF52 + SX1262 companion built with LORA_SCAN.';
+
+  @override
+  String loraScan_error(int code) {
+    return 'The node reported error $code';
+  }
+
+  @override
+  String loraScan_scanning(int passes, String elapsed, String total) {
+    return 'Scanning: pass $passes, $elapsed of $total';
+  }
+
+  @override
+  String loraScan_listening(String freq, int sf, String bw) {
+    return 'Listening on $freq MHz, SF$sf / $bw kHz';
+  }
+
+  @override
+  String get loraScan_intro =>
+      'The node checks each point of the band for LoRa chirps (CAD), which works below the noise floor. Places that fire more than the rest become candidates; listening on them tells what they are and their exact frequency.';
+
+  @override
+  String get loraScan_meshPaused => 'The mesh is paused while the radio scans';
+
+  @override
+  String get loraScan_heatmap => 'Detections';
+
+  @override
+  String get loraScan_heatmapHint =>
+      'Per bandwidth and SF: detections per pass above that row\'s false-alarm level. Dashed: the node\'s frequency.';
+
+  @override
+  String loraScan_candidates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count candidates',
+      one: '1 candidate',
+      zero: 'No candidates',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_listenAll => 'Listen to all';
+
+  @override
+  String get loraScan_noCandidates =>
+      'Nothing fires above its false-alarm level yet. A longer scan, a lower threshold or another band may help.';
+
+  @override
+  String loraScan_cadRate(int rate, int excess) {
+    return 'CAD $rate% of passes, +$excess% over its row';
+  }
+
+  @override
+  String loraScan_alternatives(String list) {
+    return 'also $list';
+  }
+
+  @override
+  String get loraScan_listenHere => 'Listen here';
+
+  @override
+  String loraScan_waiting(int packets, int preambles) {
+    return 'Listening… $packets packets, $preambles preambles';
+  }
+
+  @override
+  String loraScan_noDecode(int preambles, int headerErrors, int packets) {
+    return 'Nothing decoded: $preambles preambles, $headerErrors header errors, $packets broken packets. A different sync word, or not LoRa on these settings.';
+  }
+
+  @override
+  String get loraScan_nothing => 'Nothing heard';
+
+  @override
+  String get loraScan_otherLora => 'LoRa';
+
+  @override
+  String loraScan_packets(int good, int all) {
+    return '$good good of $all packets';
+  }
+
+  @override
+  String loraScan_result(
+    String freq,
+    int feiMin,
+    int feiMax,
+    int rssi,
+    String snr,
+    int cr,
+  ) {
+    return '$freq MHz (FEI $feiMin…$feiMax Hz) · $rssi dBm / $snr dB · CR 4/$cr';
+  }
+
+  @override
+  String get loraScan_useSettings => 'Use these radio settings';
+
+  @override
+  String get loraScan_applyTitle => 'Change radio settings?';
+
+  @override
+  String loraScan_applyBody(String freq, String bw, int sf, int cr) {
+    return 'The node will use $freq MHz, BW $bw kHz, SF$sf, CR 4/$cr.';
+  }
+
+  @override
+  String get loraScan_apply => 'Change';
+
+  @override
+  String get loraScan_applied => 'Radio settings changed';
+
+  @override
+  String get loraScan_applyRefused => 'The node refused these settings';
+
+  @override
+  String get loraScan_stepBandwidth => '= BW (faster, coarser)';
+
+  @override
+  String get loraScan_hot => 'Hot points after each pass';
+
+  @override
+  String get loraScan_hotOff => 'Off';
+
+  @override
+  String get loraScan_hotHint =>
+      'Time on the best candidates not heard yet, receiving after each detection: their packets often come during the scan.';
+
+  @override
+  String loraScan_caught(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count packets caught',
+      one: '1 packet caught',
+      zero: 'no packets caught',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_caughtDuringScan => 'Caught during the scan';
+
+  @override
+  String loraScan_hotHits(int count) {
+    return '$count on hot points';
+  }
 }

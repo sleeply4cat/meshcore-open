@@ -23,6 +23,7 @@ import '../widgets/radio_stats_entry.dart';
 import 'telemetry_screen.dart';
 import '../widgets/sync_progress_overlay.dart';
 import 'region_management_screen.dart';
+import 'lora_scan_screen.dart';
 import '../utils/share_origin.dart';
 
 /// Companion firmware version that added CMD_SET_PATH_HASH_MODE (v1.14.0).
@@ -550,6 +551,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: connector.isConnected && connector.supportsCompanionRadioStats
               ? () => pushCompanionRadioStatsScreen(context)
               : null,
+        ),
+        const Divider(height: 1, indent: 16),
+        MeshNavTile(
+          icon: Icons.travel_explore,
+          title: l10n.loraScan_settingsTile,
+          subtitle: connected ? l10n.loraScan_settingsSubtitle : offline,
+          onTap: connected ? () => pushLoraScanScreen(context) : null,
         ),
         const Divider(height: 1, indent: 16),
         MeshNavTile(

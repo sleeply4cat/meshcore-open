@@ -6038,6 +6038,10 @@ class MeshCoreConnector extends ChangeNotifier {
         _handlePathUpdated(frame);
         break;
       case pushCodeControlData:
+      case pushCodeLoraScanHit:
+      case pushCodeLoraScanPass:
+      case pushCodeLoraScanPacket:
+      case pushCodeLoraScanDone:
         // Optional feature-specific services listen to receivedFrames directly.
         break;
       case pushCodeLoginSuccess:

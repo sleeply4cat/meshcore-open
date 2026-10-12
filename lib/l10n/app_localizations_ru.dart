@@ -6333,4 +6333,233 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get networkMap_unnamed => 'Репитер без имени';
+
+  @override
+  String get loraScan_settingsTile => 'Поиск LoRa';
+
+  @override
+  String get loraScan_settingsSubtitle =>
+      'Поиск LoRa-сетей вокруг ноды; mesh на паузе';
+
+  @override
+  String get loraScan_title => 'Поиск LoRa';
+
+  @override
+  String get loraScan_start => 'Начать поиск';
+
+  @override
+  String get loraScan_stop => 'Остановить';
+
+  @override
+  String get loraScan_settings => 'Параметры поиска';
+
+  @override
+  String loraScan_passEstimate(String seconds) {
+    return 'проход ≈ $seconds с';
+  }
+
+  @override
+  String get loraScan_band => 'Диапазон';
+
+  @override
+  String get loraScan_from => 'От';
+
+  @override
+  String get loraScan_to => 'До';
+
+  @override
+  String get loraScan_aroundNode => 'Нода ± 0,5 МГц';
+
+  @override
+  String get loraScan_bandwidths => 'Полосы, кГц';
+
+  @override
+  String get loraScan_spreadingFactors => 'Spreading factor';
+
+  @override
+  String get loraScan_step => 'Шаг по частоте';
+
+  @override
+  String get loraScan_stepAuto => 'Авто (BW/2)';
+
+  @override
+  String get loraScan_cad => 'Обнаружение активности (CAD)';
+
+  @override
+  String loraScan_symbols(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count символов',
+      few: '$count символа',
+      one: '1 символ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_threshold => 'Порог';
+
+  @override
+  String get loraScan_thresholdHint =>
+      'Выше — меньше ложных срабатываний, но слабые сигналы теряются. Длиннее CAD — надёжнее, но медленнее.';
+
+  @override
+  String get loraScan_duration => 'Время поиска';
+
+  @override
+  String get loraScan_listen => 'Слушать каждого кандидата';
+
+  @override
+  String get loraScan_unsupported =>
+      'В этой прошивке нет поиска LoRa. Нужен компаньон на nRF52 + SX1262, собранный с LORA_SCAN.';
+
+  @override
+  String loraScan_error(int code) {
+    return 'Нода сообщила об ошибке $code';
+  }
+
+  @override
+  String loraScan_scanning(int passes, String elapsed, String total) {
+    return 'Поиск: проход $passes, $elapsed из $total';
+  }
+
+  @override
+  String loraScan_listening(String freq, int sf, String bw) {
+    return 'Слушаю $freq МГц, SF$sf / $bw кГц';
+  }
+
+  @override
+  String get loraScan_intro =>
+      'Нода проверяет каждую точку диапазона на LoRa-чирпы (CAD) — это работает и ниже уровня шума. Места, где срабатываний больше, чем в остальных, становятся кандидатами; прослушивание показывает, что это за сеть и её точную частоту.';
+
+  @override
+  String get loraScan_meshPaused => 'Пока идёт поиск, mesh на паузе';
+
+  @override
+  String get loraScan_heatmap => 'Срабатывания';
+
+  @override
+  String get loraScan_heatmapHint =>
+      'По каждой полосе и SF: срабатывания за проход сверх уровня ложных в этой строке. Пунктир — частота ноды.';
+
+  @override
+  String loraScan_candidates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count кандидатов',
+      few: '$count кандидата',
+      one: '1 кандидат',
+      zero: 'Кандидатов нет',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_listenAll => 'Слушать всех';
+
+  @override
+  String get loraScan_noCandidates =>
+      'Пока ничего не выделяется над уровнем ложных срабатываний. Помогут поиск подольше, ниже порог или другой диапазон.';
+
+  @override
+  String loraScan_cadRate(int rate, int excess) {
+    return 'CAD $rate% проходов, +$excess% над строкой';
+  }
+
+  @override
+  String loraScan_alternatives(String list) {
+    return 'ещё $list';
+  }
+
+  @override
+  String get loraScan_listenHere => 'Слушать';
+
+  @override
+  String loraScan_waiting(int packets, int preambles) {
+    return 'Слушаю… пакетов $packets, преамбул $preambles';
+  }
+
+  @override
+  String loraScan_noDecode(int preambles, int headerErrors, int packets) {
+    return 'Ничего не декодировано: преамбул $preambles, ошибок заголовка $headerErrors, битых пакетов $packets. Другой sync word или не LoRa с этими параметрами.';
+  }
+
+  @override
+  String get loraScan_nothing => 'Ничего не слышно';
+
+  @override
+  String get loraScan_otherLora => 'LoRa';
+
+  @override
+  String loraScan_packets(int good, int all) {
+    return '$good целых из $all пакетов';
+  }
+
+  @override
+  String loraScan_result(
+    String freq,
+    int feiMin,
+    int feiMax,
+    int rssi,
+    String snr,
+    int cr,
+  ) {
+    return '$freq МГц (FEI $feiMin…$feiMax Гц) · $rssi дБм / $snr дБ · CR 4/$cr';
+  }
+
+  @override
+  String get loraScan_useSettings => 'Применить эти параметры радио';
+
+  @override
+  String get loraScan_applyTitle => 'Изменить параметры радио?';
+
+  @override
+  String loraScan_applyBody(String freq, String bw, int sf, int cr) {
+    return 'Нода перейдёт на $freq МГц, BW $bw кГц, SF$sf, CR 4/$cr.';
+  }
+
+  @override
+  String get loraScan_apply => 'Изменить';
+
+  @override
+  String get loraScan_applied => 'Параметры радио изменены';
+
+  @override
+  String get loraScan_applyRefused => 'Нода не приняла эти параметры';
+
+  @override
+  String get loraScan_stepBandwidth => '= BW (быстрее, грубее)';
+
+  @override
+  String get loraScan_hot => 'Горячие точки после каждого прохода';
+
+  @override
+  String get loraScan_hotOff => 'Выкл';
+
+  @override
+  String get loraScan_hotHint =>
+      'Время на лучших ещё не услышанных кандидатах с приёмом после каждого срабатывания: их пакеты часто ловятся прямо во время поиска.';
+
+  @override
+  String loraScan_caught(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'поймано $count пакетов',
+      few: 'поймано $count пакета',
+      one: 'поймано 1 пакет',
+      zero: 'пакетов не поймано',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loraScan_caughtDuringScan => 'Пойман во время поиска';
+
+  @override
+  String loraScan_hotHits(int count) {
+    return 'на горячих точках $count';
+  }
 }

@@ -216,6 +216,7 @@ const int cmdGetAllowedRepeatFreq = 60;
 const int cmdSetPathHashMode = 61;
 const int cmdSetDefaultFloodScope = 63; // FIRMWARE_VER_CODE 11+
 const int cmdGetDefaultFloodScope = 64; // FIRMWARE_VER_CODE 11+
+const int cmdLoraScan = 67; // nRF52 + SX1262 firmware built with LORA_SCAN
 
 // Text message types
 const int txtTypePlain = 0;
@@ -293,6 +294,10 @@ const int pushCodeBinaryResponse = 0x8C;
 const int pushCodeControlData = 0x8E;
 const int pushCodeContactDeleted = 0x8F;
 const int pushCodeContactsFull = 0x90;
+const int pushCodeLoraScanHit = 0x91;
+const int pushCodeLoraScanPass = 0x92;
+const int pushCodeLoraScanPacket = 0x93;
+const int pushCodeLoraScanDone = 0x94;
 
 // Contact/advertisement types
 const int advTypeChat = 1;

@@ -5,6 +5,16 @@ import 'package:flutter/foundation.dart';
 import '../services/image_chunk_transport.dart' show cmdSendChannelData;
 import 'meshcore_protocol.dart';
 
+/// RESP_CODE_ERR in reply to an awaited command.
+class FirmwareCommandException implements Exception {
+  final int errCode;
+
+  const FirmwareCommandException(this.errCode);
+
+  @override
+  String toString() => 'Exception: Command failed with error code $errCode';
+}
+
 /// A command waiting for its reply from the companion firmware.
 class PendingCommandReply {
   final int commandCode;
@@ -62,6 +72,7 @@ int? replyCodeForCommand(Uint8List data) {
     case cmdSetPathHashMode:
     case cmdSendChannelData:
     case cmdSetDefaultFloodScope:
+    case cmdLoraScan:
       return respCodeOk;
     case cmdSendTxtMsg:
     case cmdSendLogin:
@@ -203,9 +214,7 @@ class PendingCommandReplies {
     if (_queue.isEmpty) return null;
     final pending = _queue.removeAt(0);
     if (pending.isTombstone) return null;
-    pending.completer?.completeError(
-      Exception('Command failed with error code $errCode'),
-    );
+    pending.completer?.completeError(FirmwareCommandException(errCode));
     return pending;
   }
 

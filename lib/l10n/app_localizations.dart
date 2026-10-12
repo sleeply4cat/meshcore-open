@@ -10590,6 +10590,337 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unnamed repeater'**
   String get networkMap_unnamed;
+
+  /// No description provided for @loraScan_settingsTile.
+  ///
+  /// In en, this message translates to:
+  /// **'LoRa scan'**
+  String get loraScan_settingsTile;
+
+  /// No description provided for @loraScan_settingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find LoRa networks around the node; pauses the mesh'**
+  String get loraScan_settingsSubtitle;
+
+  /// No description provided for @loraScan_title.
+  ///
+  /// In en, this message translates to:
+  /// **'LoRa scan'**
+  String get loraScan_title;
+
+  /// No description provided for @loraScan_start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start scan'**
+  String get loraScan_start;
+
+  /// No description provided for @loraScan_stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get loraScan_stop;
+
+  /// No description provided for @loraScan_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan settings'**
+  String get loraScan_settings;
+
+  /// No description provided for @loraScan_passEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'pass ≈ {seconds} s'**
+  String loraScan_passEstimate(String seconds);
+
+  /// No description provided for @loraScan_band.
+  ///
+  /// In en, this message translates to:
+  /// **'Band'**
+  String get loraScan_band;
+
+  /// No description provided for @loraScan_from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get loraScan_from;
+
+  /// No description provided for @loraScan_to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get loraScan_to;
+
+  /// No description provided for @loraScan_aroundNode.
+  ///
+  /// In en, this message translates to:
+  /// **'Node ± 0.5 MHz'**
+  String get loraScan_aroundNode;
+
+  /// No description provided for @loraScan_bandwidths.
+  ///
+  /// In en, this message translates to:
+  /// **'Bandwidths, kHz'**
+  String get loraScan_bandwidths;
+
+  /// No description provided for @loraScan_spreadingFactors.
+  ///
+  /// In en, this message translates to:
+  /// **'Spreading factors'**
+  String get loraScan_spreadingFactors;
+
+  /// No description provided for @loraScan_step.
+  ///
+  /// In en, this message translates to:
+  /// **'Step between points'**
+  String get loraScan_step;
+
+  /// No description provided for @loraScan_stepAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto (BW/2)'**
+  String get loraScan_stepAuto;
+
+  /// No description provided for @loraScan_cad.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel activity detection'**
+  String get loraScan_cad;
+
+  /// No description provided for @loraScan_symbols.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 symbol} other{{count} symbols}}'**
+  String loraScan_symbols(int count);
+
+  /// No description provided for @loraScan_threshold.
+  ///
+  /// In en, this message translates to:
+  /// **'Threshold'**
+  String get loraScan_threshold;
+
+  /// No description provided for @loraScan_thresholdHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher: fewer false alarms, weaker signals missed. Longer CAD: surer, slower.'**
+  String get loraScan_thresholdHint;
+
+  /// No description provided for @loraScan_duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan time'**
+  String get loraScan_duration;
+
+  /// No description provided for @loraScan_listen.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen on each candidate'**
+  String get loraScan_listen;
+
+  /// No description provided for @loraScan_unsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This firmware has no LoRa scan. It needs an nRF52 + SX1262 companion built with LORA_SCAN.'**
+  String get loraScan_unsupported;
+
+  /// No description provided for @loraScan_error.
+  ///
+  /// In en, this message translates to:
+  /// **'The node reported error {code}'**
+  String loraScan_error(int code);
+
+  /// No description provided for @loraScan_scanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning: pass {passes}, {elapsed} of {total}'**
+  String loraScan_scanning(int passes, String elapsed, String total);
+
+  /// No description provided for @loraScan_listening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening on {freq} MHz, SF{sf} / {bw} kHz'**
+  String loraScan_listening(String freq, int sf, String bw);
+
+  /// No description provided for @loraScan_intro.
+  ///
+  /// In en, this message translates to:
+  /// **'The node checks each point of the band for LoRa chirps (CAD), which works below the noise floor. Places that fire more than the rest become candidates; listening on them tells what they are and their exact frequency.'**
+  String get loraScan_intro;
+
+  /// No description provided for @loraScan_meshPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'The mesh is paused while the radio scans'**
+  String get loraScan_meshPaused;
+
+  /// No description provided for @loraScan_heatmap.
+  ///
+  /// In en, this message translates to:
+  /// **'Detections'**
+  String get loraScan_heatmap;
+
+  /// No description provided for @loraScan_heatmapHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Per bandwidth and SF: detections per pass above that row\'s false-alarm level. Dashed: the node\'s frequency.'**
+  String get loraScan_heatmapHint;
+
+  /// No description provided for @loraScan_candidates.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No candidates} =1{1 candidate} other{{count} candidates}}'**
+  String loraScan_candidates(int count);
+
+  /// No description provided for @loraScan_listenAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to all'**
+  String get loraScan_listenAll;
+
+  /// No description provided for @loraScan_noCandidates.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing fires above its false-alarm level yet. A longer scan, a lower threshold or another band may help.'**
+  String get loraScan_noCandidates;
+
+  /// No description provided for @loraScan_cadRate.
+  ///
+  /// In en, this message translates to:
+  /// **'CAD {rate}% of passes, +{excess}% over its row'**
+  String loraScan_cadRate(int rate, int excess);
+
+  /// No description provided for @loraScan_alternatives.
+  ///
+  /// In en, this message translates to:
+  /// **'also {list}'**
+  String loraScan_alternatives(String list);
+
+  /// No description provided for @loraScan_listenHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen here'**
+  String get loraScan_listenHere;
+
+  /// No description provided for @loraScan_waiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening… {packets} packets, {preambles} preambles'**
+  String loraScan_waiting(int packets, int preambles);
+
+  /// No description provided for @loraScan_noDecode.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing decoded: {preambles} preambles, {headerErrors} header errors, {packets} broken packets. A different sync word, or not LoRa on these settings.'**
+  String loraScan_noDecode(int preambles, int headerErrors, int packets);
+
+  /// No description provided for @loraScan_nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing heard'**
+  String get loraScan_nothing;
+
+  /// No description provided for @loraScan_otherLora.
+  ///
+  /// In en, this message translates to:
+  /// **'LoRa'**
+  String get loraScan_otherLora;
+
+  /// No description provided for @loraScan_packets.
+  ///
+  /// In en, this message translates to:
+  /// **'{good} good of {all} packets'**
+  String loraScan_packets(int good, int all);
+
+  /// No description provided for @loraScan_result.
+  ///
+  /// In en, this message translates to:
+  /// **'{freq} MHz (FEI {feiMin}…{feiMax} Hz) · {rssi} dBm / {snr} dB · CR 4/{cr}'**
+  String loraScan_result(
+    String freq,
+    int feiMin,
+    int feiMax,
+    int rssi,
+    String snr,
+    int cr,
+  );
+
+  /// No description provided for @loraScan_useSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Use these radio settings'**
+  String get loraScan_useSettings;
+
+  /// No description provided for @loraScan_applyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change radio settings?'**
+  String get loraScan_applyTitle;
+
+  /// No description provided for @loraScan_applyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The node will use {freq} MHz, BW {bw} kHz, SF{sf}, CR 4/{cr}.'**
+  String loraScan_applyBody(String freq, String bw, int sf, int cr);
+
+  /// No description provided for @loraScan_apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get loraScan_apply;
+
+  /// No description provided for @loraScan_applied.
+  ///
+  /// In en, this message translates to:
+  /// **'Radio settings changed'**
+  String get loraScan_applied;
+
+  /// No description provided for @loraScan_applyRefused.
+  ///
+  /// In en, this message translates to:
+  /// **'The node refused these settings'**
+  String get loraScan_applyRefused;
+
+  /// No description provided for @loraScan_stepBandwidth.
+  ///
+  /// In en, this message translates to:
+  /// **'= BW (faster, coarser)'**
+  String get loraScan_stepBandwidth;
+
+  /// No description provided for @loraScan_hot.
+  ///
+  /// In en, this message translates to:
+  /// **'Hot points after each pass'**
+  String get loraScan_hot;
+
+  /// No description provided for @loraScan_hotOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get loraScan_hotOff;
+
+  /// No description provided for @loraScan_hotHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Time on the best candidates not heard yet, receiving after each detection: their packets often come during the scan.'**
+  String get loraScan_hotHint;
+
+  /// No description provided for @loraScan_caught.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no packets caught} =1{1 packet caught} other{{count} packets caught}}'**
+  String loraScan_caught(int count);
+
+  /// No description provided for @loraScan_caughtDuringScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Caught during the scan'**
+  String get loraScan_caughtDuringScan;
+
+  /// No description provided for @loraScan_hotHits.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} on hot points'**
+  String loraScan_hotHits(int count);
 }
 
 class _AppLocalizationsDelegate

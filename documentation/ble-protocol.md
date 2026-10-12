@@ -122,6 +122,7 @@ On unexpected disconnection, auto-reconnect with exponential backoff:
 | 62 | CMD_SEND_CHANNEL_DATA | Send GRP_DATA image chunks (firmware code 11+) |
 | 63 | CMD_SET_DEFAULT_FLOOD_SCOPE | Store the radio's default flood scope: `[63][name 31, NUL padded][key 16]`, or `[63]` to clear (firmware code 11+) |
 | 64 | CMD_GET_DEFAULT_FLOOD_SCOPE | Read the radio's default flood scope (firmware code 11+) |
+| 67 | CMD_LORA_SCAN | LoRa channel scan and listen (nRF52 + SX1262 firmware built with `LORA_SCAN`); see [LoRa scan](#lora-scan) |
 
 ## Response / Push Codes (Device → App)
 
@@ -162,6 +163,10 @@ On unexpected disconnection, auto-reconnect with exponential backoff:
 | 0x8B | PUSH_CODE_TELEMETRY_RESPONSE | Sensor telemetry data |
 | 0x8C | PUSH_CODE_BINARY_RESPONSE | Binary data response |
 | 0x8E | PUSH_CODE_CONTROL_DATA | Control data push (e.g. zero-hop discovery response) |
+| 0x91 | PUSH_LORA_SCAN_HIT | A CAD detection during a LoRa scan |
+| 0x92 | PUSH_LORA_SCAN_PASS | A LoRa scan finished a pass over the band |
+| 0x93 | PUSH_LORA_SCAN_PACKET | A packet heard while listening on a candidate |
+| 0x94 | PUSH_LORA_SCAN_DONE | A LoRa scan or listen ended |
 
 ## Data Models
 
@@ -282,3 +287,21 @@ Reactions use `r:<four-hex message hash>:<two-hex emoji index>`. Channel replies
 Transport-routed raw packets include four transport-code bytes before packed path metadata. For transport floods, the app matches the first two code bytes against locally known region candidates using HMAC-SHA256 over `[payloadType][payload]`. Region scope keys are the first 16 bytes of SHA256 of `#<region>`. The radio's default flood scope is also a candidate, matched on the key the radio reports (it may have been set by another client). The name itself is not carried as plain text. Unknown or ambiguous matches remain null; see [regions](regions.md).
 
 Image chunks use `CMD_SEND_CHANNEL_DATA` (62), `RESP_CODE_CHANNEL_DATA_RECV` (27), and application data type `0xAE1C`. The framing, capacities, metadata byte, and XOR recovery algorithm are defined in [image_chunk_transport.dart](../lib/services/image_chunk_transport.dart), which is the source of truth. See [image messages](image-messages.md) for user requirements and limitations.
+
+## LoRa scan
+
+Companion firmware built with `LORA_SCAN` (nRF52 boards with an SX1262) can look for LoRa traffic over a band by channel activity detection (CAD), which works below the noise floor, and listen on a candidate channel. The mesh is paused meanwhile, and the radio returns to the node's settings at the end. Other firmware answers `RESP_CODE_ERR` 1. Values are little-endian; bandwidths are indexes into 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125, 250, 500 kHz.
+
+| Frame | Layout |
+|---|---|
+| OP_SCAN | `[67][1][from Hz u32][to Hz u32][step Hz u32, 0 = BW/2, 1 = BW][bandwidth mask u16][SF mask u8, bit k = SF 5+k][CAD symbols u8: 1, 2, 4, 8, 16][detPeak margin u8, 0 = 17 for 1–2 symbols, 13 above][detMin u8, 0 = 10][duration s u16, 1–3600]` → `RESP_CODE_OK` |
+| OP_LISTEN | `[67][2][freq Hz u32][bandwidth u8][SF u8][sync word u8][duration s u16, 1–3600]` → `RESP_CODE_OK` |
+| OP_STOP | `[67][3]` → `RESP_CODE_OK` |
+| OP_SCAN_HOT | `[67][4][time ms u16][flags u8: 1 receive after a detection][sync word u8][header wait symbols u8, 0 = 40][n u8, ≤ 24]` + n × `[freq Hz u32][bandwidth u8][SF u8]`, while a scan is on: points to go round after each pass → `RESP_CODE_OK` |
+| PUSH_LORA_SCAN_HIT | `[0x91][freq Hz u32][bandwidth u8][SF u8][hot u8: 1 on a hot point]` |
+| PUSH_LORA_SCAN_PASS | `[0x92][passes u16]` |
+| PUSH_LORA_SCAN_PACKET | `[0x93][tuned Hz u32][frequency error Hz i32, tuned − sender][RSSI dBm i8][SNR × 4 i8][CR u8, 5–8][flags u8: 1 CRC good, 2 header has CRC][bandwidth u8][SF u8][length u8][payload]` |
+| PUSH_LORA_SCAN_DONE | `[0x94][op u8][reason u8: 0 done, 1 stopped, 2 link lost, 3 radio error][RadioLib error i16][passes or packets u16][preambles u16][header errors u16]` |
+
+A scan goes point by point, for each bandwidth and SF in turn, pass after pass; the app counts detections per pass for each point (hot points left out) and treats each (bandwidth, SF) row's median as its false-alarm level. After each pass it sends the hot points: around the best candidates not heard yet, where the node receives after each detection, so packets come during the scan. A packet counts only with a payload CRC announced in its header and good (headers alone pass by chance now and then). The sender's frequency is the tuned frequency minus the frequency error. The app's client is [lora_scan.dart](../lib/services/lora_scan.dart).
+
